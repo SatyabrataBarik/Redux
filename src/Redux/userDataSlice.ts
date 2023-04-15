@@ -1,18 +1,22 @@
 import {createSlice} from "@reduxjs/toolkit"
+
 export interface LoginState{
-    userData:any
+    userData:Array<any>
 }
 const initialState:LoginState={
-   userData:[]
+   userData:[],
 }
 const userDataSlice=createSlice({
     name:'userData',
     initialState,
     reducers:{
        addToData(state,action){
-        state.userData
+        // const notExist=state.userData.find((v:any)=>v.email!=action.payload.email)
+        // if(notExist){
+          state.userData.push(action.payload)
+        // }
        }
     }
 });
-export  const {addToData:any}=userDataSlice.actions
+export  const {addToData}=userDataSlice.actions
 export default userDataSlice.reducer;

@@ -3,6 +3,7 @@ import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import Login from '../screens/Login';
 import SignUp from '../screens/SignUp';
+import homePage from '../screens/HomePage';
 const Stack=createStackNavigator();
 const StackNavigation = () => {
 
@@ -18,7 +19,9 @@ const StackNavigation = () => {
        name='signUp'
        component={SignUp}
        />
- 
+     <Stack.Screen
+     name='homePage'
+     component={homePage}/>
      
    </Stack.Navigator>
   )

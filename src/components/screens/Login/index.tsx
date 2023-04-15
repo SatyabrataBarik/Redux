@@ -2,10 +2,12 @@ import {View, Text, TextInput, StyleSheet, Pressable} from 'react-native';
 import {useState} from 'react';
 import { useAppSelector } from '../../../Redux/hooks';
 import { addToData } from '../../../Redux/userDataSlice';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../Redux/store';
 const Login = ({navigation}: any) => {
   const [email,setEmail]=useState<String>('');
   const [password,setPassword]=useState<String>('');
-  const userData=useAppSelector(addToData);
+  const userData=useSelector((state:RootState)=>state.userData.userData)
   console.log('userData', userData)
   const [error,setError]=useState<any>({
      emailError:false,
@@ -31,6 +33,14 @@ const Login = ({navigation}: any) => {
         setPassword(val)
        }
   }
+  const handleLogin=()=>{
+  const isLogin=  userData?.find(val=>val.email==email&&val.password==password)
+   if(isLogin){
+      navigation.navigate('homePage')
+   }
+    
+   
+  }
   return (
     <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
       <TextInput style={styled.input} placeholder="Enter email" onChangeText={handleEmail} />
@@ -48,8 +58,8 @@ const Login = ({navigation}: any) => {
             alignItems: 'center',
             backgroundColor: 'green',
             elevation: 5,
-          }}>
-          <Text style={{color: '#FFFFFF'}}>Login</Text>
+          }}onPress={handleLogin}>
+          <Text style={{color: '#FFFFFF'}} >Login</Text>
         </Pressable>
         <Pressable
           onPress={() => navigation.navigate('signUp')}

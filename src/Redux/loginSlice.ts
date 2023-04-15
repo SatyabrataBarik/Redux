@@ -1,13 +1,15 @@
 import {createSlice} from "@reduxjs/toolkit"
 export interface LoginState{
-    user:{[productId:string]:any}
+    user:{[id:string]:string}
 }
 const initialState:LoginState={
-    user:{}
+   user:{}
 }
 const loginSlice=createSlice({
-    name:'user',
+    name:'isLogin',
     initialState,
-    reducers:{}
+    reducers:{
+
+    }
 });
 export default loginSlice.reducer;

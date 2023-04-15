@@ -1,10 +1,14 @@
 import {View, Text, TextInput, StyleSheet, Pressable} from 'react-native';
 import React,{useState} from 'react';
 import { useAppDispatch, useAppSelector } from '../../../Redux/hooks';
-import { addToData } from '../../../Redux/userDataSlice';
+import { useDispatch, useSelector } from 'react-redux';
+ import {addToData} from '../../../Redux/userDataSlice'
+import { RootState } from '../../../Redux/store';
 
 const SignUp = ({navigation}: {navigation: any}) => {
- 
+ const dispatch=useDispatch();
+ const data=useSelector((state:RootState)=>state.userData.userData)
+ console.log('data', data)
  const [user,setUser]=useState({
   name:'',
   email:'',
@@ -19,6 +23,7 @@ const SignUp = ({navigation}: {navigation: any}) => {
     phoneNumber: false,
     password: false,
     allAbove: false,
+    existEmail:false,
   });
 
   const handleName =(val:string)=> {
@@ -60,7 +65,19 @@ const SignUp = ({navigation}: {navigation: any}) => {
       setUser({...user,password:val})
     }
   };
+  const handleSave=()=>{
+   const exist= data.find((emailData)=>emailData.email==user.email)
 
+     if(exist){
+         
+      setShowError({...showError,existEmail:true})
+     }
+     else{
+    dispatch(addToData(user))
+    setShowError({...showError,existEmail:false})
+     }
+  }
+  // console.log('user', user)
   return (
     <View style={{alignItems: 'center', flex: 1, justifyContent: 'center'}}>
       <TextInput style={styled.input} placeholder="Enter your name" onChangeText={handleName} />
@@ -71,14 +88,16 @@ const SignUp = ({navigation}: {navigation: any}) => {
       {showError.phoneNumber&&<Text style={{color:'red'}}>Enter valid mobile number</Text>}
       <TextInput style={styled.input} placeholder="Enter password" onChangeText={handlePassword} />
       {showError.password&&<Text style={{color:'red'}}>Enter valid password</Text>}
-      <Pressable style={styled.button} onPress={()=>useAppDispatch(addToData(user))}>
+      <Pressable style={styled.button} onPress={handleSave}>
         <Text>Signup</Text>
       </Pressable>
       <Pressable
         style={{marginTop: 12}}
         onPress={() => navigation.navigate('landing')}>
         <Text>Already Sign up login </Text>
+
       </Pressable>
+      {showError.existEmail&&<Text style={{color:'red'}}>already Sign up please Login</Text>}
     </View>
   );
 };
