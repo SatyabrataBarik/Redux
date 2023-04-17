@@ -2,21 +2,20 @@ import {View, Text} from 'react-native';
 import React from 'react';
 import App from '../App';
 import {Provider} from 'react-redux';
-import {store} from './Redux/store';
-import { ApiProvider } from '@reduxjs/toolkit/dist/query/react';
-import { processColor } from 'react-native-reanimated';
 
+import {PersistGate} from 'redux-persist/integration/react';
+import {persistor, store} from './Redux/store';
 
 const Main = () => {
   return (
     <Provider store={store}>
-    {/* <ApiProvider api={productApi}> */}
-    
-      <App />
+      {/* <ApiProvider api={productApi}> */}
+      {/* <PersistGate loading={null} persistor={persistor}> */}
+        <App />
+      {/* </PersistGate> */}
+
       {/* </ApiProvider> */}
-     </Provider>
-  
-     
+    </Provider>
   );
 };
 
