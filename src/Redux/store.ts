@@ -4,9 +4,9 @@ import userDataSlice from './userDataSlice';
 import {apiSlice} from './Api/apiSlice';
 import {setupListeners} from '@reduxjs/toolkit/dist/query';
 import { persistReducer, persistStore } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
-// import AsyncStorage from '@react-native-community/async-storage';
+
 
 const persistConfig = {
   key: 'root',
