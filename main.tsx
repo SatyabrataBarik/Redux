@@ -1,10 +1,10 @@
 import {View, Text} from 'react-native';
 import React from 'react';
-import App from '../App';
+import App from './App';
 import {Provider} from 'react-redux';
 
-import {PersistGate} from 'redux-persist/integration/react';
-import {persistor, store} from './Redux/store';
+
+import { store} from './src/Redux/store';
 
 const Main = () => {
   return (
