@@ -3,7 +3,7 @@ import React from 'react';
 import {useGetDataQuery} from '../../../Redux/Api/apiSlice';
 import {ScrollView} from 'react-native-gesture-handler';
 
-const homePage = () => {
+const HomePage = () => {
   const {data} = useGetDataQuery();
 
   const renderELement = ({item}: {item: any}) => {
@@ -35,4 +35,4 @@ const homePage = () => {
   );
 };
 
-export default homePage;
+export default HomePage;
